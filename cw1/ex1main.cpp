@@ -12,7 +12,7 @@ int main(void)
      char c_tab[] = {'\"', 'a', 'b', 'c', 'z', '\"'};
      char* c_ptr_tab[] = {"to", "jest", "moj", "pierwszy", "program", "na" , "zajeciach"};
      aghFib fib;
-     
+
      bool t1 = suma(i_tab, 5) == 17;
      bool t2 = suma(c_tab, 6) == 484;
      bool t3 = suma(c_ptr_tab, 7) == 35;
