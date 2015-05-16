@@ -3,12 +3,14 @@
 
 #include <iostream>
 #include <math.h>
+#include <cstdarg> // do funkcji o zmiennej liczbie argumentow --- setItems(int r, int c ...)
 
 using namespace std;
 
 //////////////////////////////
 // gdzie ta obsluga wyjatkow ma byc zaincludowana, skoro nie wolno
 // includowac plikow cpp?... // aghExeption.h nie jest plikiem cpp.
+//@@@@@@@@@@@ zastanawiam sie czy nie przydaloby sie podzielic tego na deklaracje/definicje i dorobic plik aghInclude.cpp
 
 template <class T>
 class aghMatrix {
@@ -38,7 +40,48 @@ public:
 
     }
 
-    void setAll()
+	void setItems (T * wsk)
+	{
+		int licznik = 0;
+		for(int i = 0; i < n; i ++)
+		{
+			for (int j = 0; j < m; j ++)
+			{
+				matrix[i][j] = wsk[licznik];
+				licznik ++;
+			}
+		}
+	}
+
+	void setItems(int r, int c ...)
+	{
+		  matrix = new  T * [r];
+		  n = r;
+		  m = c;
+        
+        for (int i = 0; i < r; i ++)
+        {
+            matrix[i] = new T[c];
+        }
+
+		va_list ap;
+		va_start(ap,c);
+		
+		for(int i = 0; i < r; i ++)
+		{
+			for (int j = 0; j < c; j ++)
+			{
+				matrix[i][j] = va_arg(ap,char);
+				
+			}
+		}
+
+		va_end(ap);
+	}
+
+
+	//--------------------------------------To bedzie trzeba przed wyslaniem usun�c bo zrobilem to jako testowe zeby sprawdzac wartosci czy dzialaja operatory
+    void setAll()         
     {
         for (int i = 0; i < n; i ++)
         {
@@ -145,8 +188,8 @@ public:
         for(int i=0;i<n;i++)
         {
             for(int j=0;j<m;j++){
-                temp.matrix[i][j].x=0;
-                temp.matrix[i][j].y=0;
+                temp.matrix[i][j].x=0;	// x i y nie istnieje
+                temp.matrix[i][j].y=0;	// masz n i m - rozmiary macierzy, i matrix[][] to jest ta macierz, temp jest objektem pomocniczym ;d
                 for(int k=0;k<m;k++)
                 {
                     temp.matrix[i][j]=temp.matrix[i][j].add(temp.matrix[i][k].mul(temp.matrix[k][j]));
