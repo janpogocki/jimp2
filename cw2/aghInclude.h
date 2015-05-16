@@ -2,6 +2,7 @@
 #define PLIKH
 
 #include <iostream>
+#include <math.h>
 
 using namespace std;
 
@@ -22,13 +23,13 @@ public:
         n = _n;
         m = _m;
         matrix = new  T * [n];
-        
+
         for (int i = 0; i < n; i ++)
         {
             matrix[i] = new T[m];
         }
-        
-        
+
+
     }
 
     void setItem(int n, int m, T item) // n - wiersz, m - kolumna
@@ -82,9 +83,9 @@ public:
             for (int j = 0; j < m; j ++)
             {
                 temp.matrix[i][j] = (matrix[i][j] + other.matrix[i][j]);
-                
+
             }
-            
+
         }
 
         return temp;
@@ -131,13 +132,27 @@ public:
      aghMatrix<T> operator*(const aghMatrix<T> & other)
      {
          aghMatrix<T> temp(n,m);
-         for(int i = 0; i < n; i ++)
+         /*for(int i = 0; i < n; i ++)
          {
              for(int j = 0; j < m; j ++)
              {
                  temp.matrix[i][j] = matrix[i][j] * other.matrix[i][j];
              }
-         }
+         }*/
+
+
+         //nie jestem pewny czy dobre zmienne sa....
+        for(int i=0;i<n;i++)
+        {
+            for(int j=0;j<m;j++){
+                temp.matrix[i][j].x=0;
+                temp.matrix[i][j].y=0;
+                for(int k=0;k<m;k++)
+                {
+                    temp.matrix[i][j]=temp.matrix[i][j].add(temp.matrix[i][k].mul(temp.matrix[k][j]));
+                }
+            }
+        }
 
          return temp;
      }
