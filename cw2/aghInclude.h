@@ -12,78 +12,140 @@ using namespace std;
 template <class T>
 class aghMatrix {
 private:
-	T ** matrix;
-	int n;
-	int m;
+    T ** matrix;
+    int n;
+    int m;
 
 public:
-	aghMatrix(int _n, int _m)
-	{
-		n = _n;
-		m = _m;
-		matrix = new  T * [n];
+    aghMatrix(int _n, int _m)
+    {
+        n = _n;
+        m = _m;
+        matrix = new  T * [n];
+        
+        for (int i = 0; i < n; i ++)
+        {
+            matrix[i] = new T[m];
+        }
+        
+        
+    }
 
-		for (int i = 0; i < n; i ++)
-		{
-			matrix[i] = new T[m];
-		}
+    void setItem(int n, int m, T item) // n - wiersz, m - kolumna
+    {
+        matrix[n][m] = item;
+
+    }
+
+    void setAll()
+    {
+        for (int i = 0; i < n; i ++)
+        {
+            for (int j = 0; j < m; j ++)
+            {
+                matrix[i][j] = j + i;
+            }
+        }
+    }
+
+    void getALL()
+    {
+        for (int i = 0; i < n; i ++)
+        {
+            for (int j = 0; j < m; j ++)
+            {
+                cout << matrix[i][j];
+            }
+            cout << endl;
+        }
+    }
 
 
-	}
-
-	void setItem(int n, int m, T item) // n - wiersz, m - kolumna
-	{
-		matrix[n][m] = item;
-
-	}
+    ~aghMatrix()
+    {
+        cout << "destruktor" <<endl;
+    }
 
 
-	~aghMatrix()
-	{
-		cout << "destruktor" <<endl;
-	}
+    T operator()(int a, int b)
+    {
+        return matrix[a][b];
+    }
 
-	// ------------------------------------------------------------------> to zacz¹lem pisac na szybko wiec nie przetestowalem, rano to zrobie.
+    aghMatrix<T> operator+ (const aghMatrix<T> & other)
+    {
+        aghMatrix<T>temp(n,m);
 
-	T operator()(int a, int b)
-	{
-		return matrix[a][b];
-	}
 
-	T ** operator+ (const aghMatrix<T> & other)
-	{
-		T ** temp = new * T[n];
-		for (int i = 0; i < n; i ++)
-		{
-			temp[i] = new T[m];
-		}
+        for (int i = 0; i < n; i ++)
+        {
+            for (int j = 0; j < m; j ++)
+            {
+                temp.matrix[i][j] = (matrix[i][j] + other.matrix[i][j]);
+                
+            }
+            
+        }
 
-		for (int i = 0; i < n; i ++)
-		{
-			for (int j = 0; j < m; j ++)
-			{
-				temp[i][j] = (matrix[i][j] + other.matrix[i][j]);
-			}
+        return temp;
+    }
 
-		}
+        aghMatrix<T> & operator= ( const aghMatrix<T> & other)
+        {
+            for (int i = 0; i < n; i ++)
+            {
+                    for (int j = 0; j < m; j ++)
+                    {
+                        matrix[i][j] = other.matrix[i][j];
+                    }
+            }
+            return *this;
+        }
 
-		return temp;
-	}
+        bool operator== (const aghMatrix<T> & other)
+        {
+            for (int i = 0; i < n; i ++)
+            {
+                for (int j = 0; j < m; j ++)
+                {
+                    if (matrix[i][j] != other.matrix[i][j]) return false;
+                }
 
-		T & operator= ( const aghMatrix<T> & other)
-		{
-			for (int i = 0; i < n; i ++)
-			{
-					for (int j = 0; j < m; j ++)
-					{
+            }
+            return true;
+        }
 
-					}
-			}
-		}
+     bool operator!= (const aghMatrix<T> & other)
+        {
+            for (int i = 0; i < n; i ++)
+            {
+                for (int j = 0; j < m; j ++)
+                {
+                    if (matrix[i][j] != other.matrix[i][j]) return true;
+                }
+
+            }
+            return false;
+        }
+
+     aghMatrix<T> operator*(const aghMatrix<T> & other)
+     {
+         aghMatrix<T> temp(n,m);
+         for(int i = 0; i < n; i ++)
+         {
+             for(int j = 0; j < m; j ++)
+             {
+                 temp.matrix[i][j] = matrix[i][j] * other.matrix[i][j];
+             }
+         }
+
+         return temp;
+     }
+
+
 
 
 };
-
 //------------------------------------------------------------------
 //KLASA aghComplex
 
