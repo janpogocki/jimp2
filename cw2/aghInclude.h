@@ -20,6 +20,8 @@ private:
     int m;
 
 public:
+    aghMatrix() {};
+
     aghMatrix(int _n, int _m)
     {
         n = _n;
@@ -58,7 +60,7 @@ public:
 		  matrix = new  T * [r];
 		  n = r;
 		  m = c;
-        
+
         for (int i = 0; i < r; i ++)
         {
             matrix[i] = new T[c];
@@ -66,13 +68,13 @@ public:
 
 		va_list ap;
 		va_start(ap,c);
-		
+
 		for(int i = 0; i < r; i ++)
 		{
 			for (int j = 0; j < c; j ++)
 			{
 				matrix[i][j] = va_arg(ap,char);
-				
+
 			}
 		}
 
@@ -81,7 +83,7 @@ public:
 
 
 	//--------------------------------------To bedzie trzeba przed wyslaniem usun�c bo zrobilem to jako testowe zeby sprawdzac wartosci czy dzialaja operatory
-    void setAll()         
+    void setAll()
     {
         for (int i = 0; i < n; i ++)
         {
