@@ -84,8 +84,8 @@ public:
 /// \param out - a given stream 
 /// \param right - a reference to the aghContainer object
 /// \return returns a reference to the given stream
-	template <class T>
-	friend ostream& operator<<(ostream& out, aghContainer<T> const& right);
+	template <class L>
+	friend ostream& operator<<(ostream& out, aghContainer<L> const& right);
 	
 	
 /// \brief an overloaded operator << that adds element to container
@@ -267,8 +267,8 @@ aghContainer<T>& aghContainer<T>::operator+=(aghContainer<T> const& right)
 }
 
 //-----------------------OPERATOR<<------------------------------------------
-template <class T>
-ostream& operator<<(ostream& out, aghContainer<T> const& right)
+template <class L>
+ostream& operator<<(ostream& out, aghContainer<L> const& right)
 {
 	for (int i = 0; i < right.size(); i ++)
 	{
