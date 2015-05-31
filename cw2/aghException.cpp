@@ -1,5 +1,5 @@
 #include <iostream>
-#include <string.h>
+#include <string>
 // --------------------------------------------------------------
 
 using namespace std;
@@ -134,9 +134,9 @@ aghException& aghException::operator=(aghException const& __other)
 }
 // --------------------------------------------------------------
 
-ostream& operator<<(ostream& __out, aghException& __exception)
+ostream& operator<<(ostream& out, aghException& exception)
 {
-     __out << "Error in " << __exception.errorFile() << " file at " << __exception.errorLine() << " line.\nError code: " << __exception.errorCode() << " (" << __exception.errorMessage() << ").";
-     return __out;
+     out << "Error in " << exception.errorFile() << " file at " << exception.errorLine() << " line.\nError code: " << exception.errorCode() << " (" << exception.errorMessage() << ").";
+     return out;
 }
 // --------------------------------------------------------------
